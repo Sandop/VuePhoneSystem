@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": ".\\node_modules\\.bin\\webpack-dev-server --inline --hot --open --port 6699",
+    "build": "webpack"
   },
   "author": "Sando",
   "license": "ISC",
