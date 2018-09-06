@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 
 import Axios from 'axios';
-Vue.prototype.$ajax = Axios;
+Vue.prototype.$axios = Axios;
 Axios.defaults.baseURL = 'http://182.254.146.100:8899/api/';
 
 
@@ -23,6 +23,7 @@ import Home from './components/home/home.vue';
 import Member from './components/member/member.vue';
 import Shopcart from './components/shopcart/shopcart.vue';
 import Search from './components/search/search.vue';
+import NewsList from './components/news/newsList.vue';
 
 let router = new VueRouter({
     linkActiveClass:'mui-active',
@@ -53,6 +54,11 @@ let router = new VueRouter({
             name: 'shopcart',
             path: '/shopcart',
             component: Shopcart
+        },
+        {   
+            name: 'news.list',
+            path: '/news/list',
+            component: NewsList
         },
     ]
 });

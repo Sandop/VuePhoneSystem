@@ -38,3 +38,7 @@ table {
     visibility: hidden;
 }
 .clearfix { *zoom:1; }
+
+.container {
+    margin-top: 40px;
+}
