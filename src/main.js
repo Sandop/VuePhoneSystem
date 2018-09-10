@@ -25,6 +25,12 @@ import Shopcart from './components/shopcart/shopcart.vue';
 import Search from './components/search/search.vue';
 import NewsList from './components/news/newsList.vue';
 
+import Moment from 'moment';
+
+Vue.filter('converData',function(value){
+    return Moment(value).format('YYYY-MM-DD');
+})
+
 let router = new VueRouter({
     linkActiveClass:'mui-active',
     routes: [
