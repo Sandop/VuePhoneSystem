@@ -27,7 +27,6 @@
             let id = this.$route.query.id;
             this.$axios.get(`http://visney.cn:81/article/getArticleDetails/${id}`)
             .then( res => {
-                console.log(res);
                 this.newsDetails = res.data;
                 this.articleEditor = res.data.articleEditor;
                 this.articleCategory = res.data.articleCategory;

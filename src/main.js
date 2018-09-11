@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 
 import Axios from 'axios';
 Vue.prototype.$axios = Axios;
-Axios.defaults.baseURL = 'http://182.254.146.100:8899/api/';
+Axios.defaults.baseURL = 'http://visney.cn:81';
 
 
 
@@ -26,6 +26,7 @@ import Search from './components/search/search.vue';
 import NewsList from './components/news/newsList.vue';
 import NewsDetails from './components/news/newsdetails.vue';
 import NavBar from './components/common/navBar.vue';
+import PhotoShare from './components/photo/share.vue';
 
 import Moment from 'moment';
 
@@ -74,6 +75,11 @@ let router = new VueRouter({
             name: 'news.details',
             path: '/news/details',
             component: NewsDetails
+        },
+        {   
+            name: 'photo.share',
+            path: '/photo/share',
+            component: PhotoShare
         },
     ]
 });
