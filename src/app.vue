@@ -30,5 +30,7 @@
 </script>
 
 <style>
-
+.mint-header.is-fixed {
+    z-index: 666;
+}
 </style>

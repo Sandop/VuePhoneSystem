@@ -24,8 +24,12 @@ import Member from './components/member/member.vue';
 import Shopcart from './components/shopcart/shopcart.vue';
 import Search from './components/search/search.vue';
 import NewsList from './components/news/newsList.vue';
+import NewsDetails from './components/news/newsdetails.vue';
+import NavBar from './components/common/navBar.vue';
 
 import Moment from 'moment';
+
+Vue.component('navBar',NavBar);
 
 Vue.filter('converData',function(value){
     return Moment(value).format('YYYY-MM-DD');
@@ -65,6 +69,11 @@ let router = new VueRouter({
             name: 'news.list',
             path: '/news/list',
             component: NewsList
+        },
+        {   
+            name: 'news.details',
+            path: '/news/details',
+            component: NewsDetails
         },
     ]
 });

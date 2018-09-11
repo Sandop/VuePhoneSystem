@@ -40,5 +40,6 @@ table {
 .clearfix { *zoom:1; }
 
 .container {
+    overflow: hidden;
     margin-top: 40px;
 }
