@@ -4,13 +4,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
-
-
 import Axios from 'axios';
-Vue.prototype.$axios = Axios;
-Axios.defaults.baseURL = 'http://visney.cn:81';
-
-
 
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
@@ -29,6 +23,25 @@ import NavBar from './components/common/navBar.vue';
 import PhotoShare from './components/photo/share.vue';
 
 import Moment from 'moment';
+
+Vue.prototype.$axios = Axios;
+Axios.defaults.baseURL = 'http://visney.cn:81';
+
+Axios.interceptors.request.use( function (config) {
+    MintUI.Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+    });
+
+    return config;
+});
+
+Axios.interceptors.response.use( function (config){
+    MintUI.Indicator.close();
+    return config;
+
+});
+
 
 Vue.component('navBar',NavBar);
 
