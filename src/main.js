@@ -35,19 +35,18 @@ Vue.prototype.$axios = Axios;
 Axios.defaults.baseURL = 'http://visney.cn:81';
 
 //配置拦截器实现加载动画，使用mint-ui实现
+//请求发起前显示loading
 Axios.interceptors.request.use( function (config) {
     MintUI.Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
     });
-
     return config;
 });
-
+//响应回来后结束loading
 Axios.interceptors.response.use( function (config){
     MintUI.Indicator.close();
     return config;
-
 });
 
 
