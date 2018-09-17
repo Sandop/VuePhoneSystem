@@ -26,9 +26,9 @@
 </script>
 
 <style scoped>
-    header.mui-bar.mui-bar-nav {
-        position:  fixed;
+    .mui-bar.mui-bar-nav {
+        position:  relative;
         height: 50px;
-        top: 40px;
+        top: 0px;
     }
 </style>

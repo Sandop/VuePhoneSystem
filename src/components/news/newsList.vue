@@ -4,8 +4,8 @@
         <div class="news-list">
             <ul class="mui-table-view mui-table-view-chevron">
                 <li class="mui-table-view-cell mui-media" v-for="list in newsList" :key="list.articleId">
-                    <router-link class="mui-navigate-right" :to="{name: 'news.details', query: {id: list.articleId}}">
-                        <img class="mui-media-object mui-pull-left" :src="list.articleImg.articleImgSrc" :alt="list.articleImg.articleImgAlt">
+                    <router-link class="mui-navigate-right" :to="{name: 'news.details', params: {id: list.articleId}}">
+                        <img class="mui-media-object mui-pull-left" v-lazy="list.articleImg.articleImgSrc" :alt="list.articleImg.articleImgAlt">
                         <div class="mui-media-body">
                             <span>{{list.articleName}}</span>
                             <div class="news-desc">
@@ -37,10 +37,6 @@
 </script>
 
 <style scoped>
-    .news-list {
-        margin-top: 50px;
-    }
-
     .mui-media-body p {
         color: #0bb0f5;
     }

@@ -26,6 +26,9 @@ import NewsList from './components/news/newsList.vue';
 import NewsDetails from './components/news/newsdetails.vue';
 import NavBar from './components/common/navBar.vue';
 import PhotoShare from './components/photo/share.vue';
+import ProdList from './components/prod/prodList.vue';
+import ProdDetail from './components/prod/prodDetail.vue';
+
 
 
 //Axios配置相关项
@@ -102,13 +105,28 @@ let router = new VueRouter({
         },
         {   
             name: 'news.details',
-            path: '/news/details',
+            path: '/news/details/:id',
             component: NewsDetails
         },
         {   
             name: 'photo.share',
             path: '/photo/share',
             component: PhotoShare
+        },
+        {   
+            name: 'share.detailes',
+            path: '/photo/shareDetailes/:id',
+            component: NewsDetails          //使用新闻详情的模板
+        },
+        {   
+            name: 'prod.list',
+            path: '/prod/prodList',
+            component: ProdList
+        },
+        {   
+            name: 'prod.detail',
+            path: '/prod/prodDetail',
+            component: ProdDetail
         },
     ]
 });

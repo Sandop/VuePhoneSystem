@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        搜索
+        产品详情
     </div>
 </template>
 
 <script>
-export default {
+    export default {
 
-}
+    }
 </script>
 
 <style scoped>

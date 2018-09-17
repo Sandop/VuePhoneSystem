@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <nav-bar title="新闻详情"></nav-bar>
+        <nav-bar title="内容详情"></nav-bar>
         <div class="news-title">
-            <p v-text="newsDetails.articleMetaTitle"></p>
+            <p v-text="newsDetails.articleName"></p>
             <div class="news-tab">
                 <span>作者:{{articleEditor.articleEditorName}}</span>
                 <span>分类:{{articleCategory.articleCategoryName}}</span>
@@ -24,8 +24,8 @@
             }
         },
         created (){
-            let id = this.$route.query.id;
-            this.$axios.get(`http://visney.cn:81/article/getArticleDetails/${id}`)
+            let id = this.$route.params.id;
+            this.$axios.get(`/article/getArticleDetails/${id}`)
             .then( res => {
                 this.newsDetails = res.data;
                 this.articleEditor = res.data.articleEditor;
@@ -36,8 +36,10 @@
 </script>
 
 <style scoped>
+    .container {
+        width: 100%;
+    }
     .news-title p {
-        margin-top: 60px;
         color: #0a87f8;
         font-size: 20px;
         font-weight: bold;
@@ -62,16 +64,19 @@
 
     /*主体文章的左右距离*/
 
-    .news-content {
+    .container .news-content {
+        overflow: hidden;
         width: 100%;
         padding: 10px 5px;
     }
 
-    .news-content p {
+    .container .news-content p {
+        display: block;
         width: 100%;
     }
 
-    .news-content p img{
+    .container .news-content p img{
+        display: block;
         width: 100%;
     }
 </style>

@@ -24,10 +24,10 @@
                     </router-link>
                 </li>
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">
+                    <router-link :to="{ name: 'prod.list'}">
                         <span class="mui-icon mui-icon-chatbubble"></span>
                         <div class="mui-media-body">商品展示</div>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                     <a href="#">
@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .mint-swipe{
         height: 187px;
         max-height:187px; 

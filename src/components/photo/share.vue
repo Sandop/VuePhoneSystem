@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <nav-bar title="图片分享"></nav-bar>
+        <nav-bar title="图文分享"></nav-bar>
         <div class="share_wrap">
             <div class="photo-header">
                 <ul>
@@ -12,16 +12,16 @@
             <div class="photo-list">
                 <ul>
                     <li v-for="list in shareData" :key="list.articleId">
-                        <a>
+                        <router-link :to="{ name:'share.detailes',params: {id:list.articleId} }">
                             <!-- <img :src="img.img_url"> -->
-                            <!-- 懒加载 -->
+                            <!-- 懒加载实现，使用mintUI插件中v-lazy属性，请求可视区域内容 -->
                             <img v-lazy="list.articleImg.articleImgSrc" :alt="list.articleImg.articleImgAlt">
                             <p>
                                 <span v-text="list.articleName"></span>
                                 <br>
                                 <span v-text="list.articleText"></span>
                             </p>
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -38,9 +38,9 @@
             }
         },
         created (){
+            //请求列表头部内容
             this.$axios.get(`/articleCategory/getAll`)
                 .then(res => {
-                    console.log(res);
                     this.categorys = res.data;
                     // this.categorys.unshift({
                     //     articleCategoryId: 0,
@@ -49,7 +49,6 @@
                     //     keyword: '',
                     //     title: ''
                     // });
-                    console.log(this.categorys)
                 })
                 .catch(err => {
                     console.log(err);
@@ -59,10 +58,10 @@
             
         },
         methods: {
+            //请求函数封装
             changeCate (id){
                 this.$axios.get(`/article/getArticles/${id}/1/8`)
                 .then(res => {
-                    console.log(res);
                     this.shareData = res.data.list;
                 })
                 .catch(err => {
@@ -73,11 +72,7 @@
     }
 </script>
 
-<style>
-    .share_wrap {
-        margin-top: 60px;
-    }
-
+<style scoped>
     .photo-header li {
         list-style: none;
         display: inline-block;
