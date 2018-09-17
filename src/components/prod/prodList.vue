@@ -2,31 +2,33 @@
     <div class="container">
         <nav-bar title="商品列表"></nav-bar>
         <!-- 产品列表上拉加载更多效果，使用mintUi插件mt-loadmore实现，上拉完毕需要调用onBottomLoaded函数告知上拉完毕 -->
-        <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="isAutoFill" ref="loadmore">
-            <ul class="mui-table-view mui-grid-view">
-                <li v-for="prod in prods" :key="prod.proId" class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <router-link :to="{name:'prod.detail',query:{id:prod.proId} }">
-                        <!-- v-lazy使用的 mintUi的插件实现产品图片的懒加载 -->
-                        <img class="mui-media-object" v-lazy="prod.proImgs[0].proImgSrc" :alt="prod.proImgs[0].proImgAlt">
-                        <div class="mui-media-body">{{prod.proName}}</div>
-                        <div class="desc">
-                            <div class="sell">
-                                <span>￥{{prod.proPrice}}</span>
-                                <s>￥{{prod.proPrice}}</s>
-                            </div>
-                            <div class="detail">
-                                <div class="hot">
-                                    热卖中
+        <div class="prod-wrap">
+            <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="isAutoFill" ref="loadmore">
+                <ul class="mui-table-view mui-grid-view">
+                    <li v-for="prod in prods" :key="prod.proId" class="mui-table-view-cell mui-media mui-col-xs-6">
+                        <router-link :to="{name:'prod.detail',query:{id:prod.proId} }">
+                            <!-- v-lazy使用的 mintUi的插件实现产品图片的懒加载 -->
+                            <img class="mui-media-object" v-lazy="prod.proImgs[0].proImgSrc" :alt="prod.proImgs[0].proImgAlt">
+                            <div class="mui-media-body">{{prod.proName}}</div>
+                            <div class="desc">
+                                <div class="sell">
+                                    <span>￥{{prod.proPrice}}</span>
+                                    <s>￥{{prod.proPrice}}</s>
                                 </div>
-                                <div class="count">
-                                    剩{{prod.proStyleId}}件
+                                <div class="detail">
+                                    <div class="hot">
+                                        热卖中
+                                    </div>
+                                    <div class="count">
+                                        剩{{prod.proStyleId}}件
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </router-link>
-                </li>
-            </ul>
-        </mt-loadmore>
+                        </router-link>
+                    </li>
+                </ul>
+            </mt-loadmore>
+        </div>
     </div>
 </template>
 
@@ -37,7 +39,7 @@
                 pageIndex: 1,   //页码数
                 prods: [],      //商品列表数据
                 allLoaded:false, //是否禁止触发上拉函数
-                isAutoFill:true,//是否自动触发上拉函数
+                isAutoFill:false,//是否自动触发上拉函数
 
                 //产品列表数据请求为post的参数
                 dataJson: {
@@ -52,10 +54,11 @@
                 }
             }
         },
+        
         created (){
             this.$axios.post('/product/selectByCondition/1/8',this.dataJson)
             .then( res => {
-                console.log(res);
+                // console.log(res);
                 this.prods = res.data.list;
             }).catch( err => {
                 console.log(err);
@@ -63,6 +66,8 @@
         },
         methods: {
             loadBottom(){
+                // console.log('开始上拉！')
+                //上拉调用加载更多函数
                 this.loadMoreCon();
             },
             loadMoreCon (){
@@ -85,9 +90,11 @@
 </script>
 
 <style scoped>
-    .container {
+    .prod-wrap {
+        overflow: auto;
         height:577px;
-        /* 这个高度设置可以使上拉的时候加载内容 */
+        -webkit-overflow-scrolling: touch;
+        /* 这个高度设置,overflow:auto/scroll可以使上拉的时候加载内容 ,针对ios加个-webkit-overflow-scrolling: touch的属性*/
     }
     .mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn) {
         margin: 0px;
