@@ -1,7 +1,7 @@
 <template>
-    <div class="container" style="height:577px;">
+    <div class="container">
         <nav-bar title="商品列表"></nav-bar>
-        <!-- 产品列表上拉加载更多效果，使用mintUi插件mt-loadmore实现 -->
+        <!-- 产品列表上拉加载更多效果，使用mintUi插件mt-loadmore实现，上拉完毕需要调用onBottomLoaded函数告知上拉完毕 -->
         <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="isAutoFill" ref="loadmore">
             <ul class="mui-table-view mui-grid-view">
                 <li v-for="prod in prods" :key="prod.proId" class="mui-table-view-cell mui-media mui-col-xs-6">
@@ -37,7 +37,7 @@
                 pageIndex: 1,   //页码数
                 prods: [],      //商品列表数据
                 allLoaded:false, //是否禁止触发上拉函数
-                isAutoFill:false,//是否自动触发上拉函数
+                isAutoFill:true,//是否自动触发上拉函数
 
                 //产品列表数据请求为post的参数
                 dataJson: {
@@ -63,10 +63,9 @@
         },
         methods: {
             loadBottom(){
-                console.log('上啦触发了');
-                this.loadMore();
+                this.loadMoreCon();
             },
-            loadMore (){
+            loadMoreCon (){
                 this.$axios.post(`/product/selectByCondition/${++ this.pageIndex}/8`,this.dataJson)
                 .then( res => {
                     this.prods = this.prods.concat(res.data.list);
@@ -75,6 +74,7 @@
                     if (this.prods.length >= res.data.total) {
                         this.allLoaded = true;//禁止调用上拉函数了
                     }
+                    //上拉结束通知结束停止
                     this.$refs.loadmore.onBottomLoaded();
                 }).catch( err => {
                     console.log(err);
@@ -85,7 +85,10 @@
 </script>
 
 <style scoped>
-    
+    .container {
+        height:577px;
+        /* 这个高度设置可以使上拉的时候加载内容 */
+    }
     .mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn) {
         margin: 0px;
         padding: 0px;
