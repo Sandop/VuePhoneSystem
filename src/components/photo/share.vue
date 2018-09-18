@@ -73,6 +73,10 @@
 </script>
 
 <style scoped>
+    .photo-list {
+        margin-top: 21px;
+    }
+
     .photo-header li {
         list-style: none;
         display: inline-block;

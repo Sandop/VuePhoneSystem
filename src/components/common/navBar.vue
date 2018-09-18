@@ -27,8 +27,8 @@
 
 <style scoped>
     .mui-bar.mui-bar-nav {
-        position:  relative;
+        position:  fixed;
         height: 50px;
-        top: 0px;
+        top: 40px;
     }
 </style>
