@@ -71,10 +71,10 @@
 <style scoped>
     .news-list {
         overflow: auto;
-        height:577px;
+        height:527px;
         -webkit-overflow-scrolling: touch;
         /* 这个高度设置,overflow:auto/scroll可以使上拉的时候加载内容 ,针对ios加个-webkit-overflow-scrolling: touch的属性*/
-        margin-top: 100px;
+        margin-top: 54px;
     }
 
     .mui-media-body p {

@@ -10,20 +10,22 @@
                 </ul>
             </div>
             <div class="photo-list">
-                <ul>
-                    <li v-for="list in shareData" :key="list.articleId">
-                        <router-link :to="{ name:'share.detailes',params: {id:list.articleId} }">
-                            <!-- <img :src="img.img_url"> -->
-                            <!-- 懒加载实现，使用mintUI插件中v-lazy属性，请求可视区域内容 -->
-                            <img v-lazy="list.articleImg.articleImgSrc" :alt="list.articleImg.articleImgAlt">
-                            <p>
-                                <span v-text="list.articleName"></span>
-                                <br>
-                                <span v-text="list.articleText"></span>
-                            </p>
-                        </router-link>
-                    </li>
-                </ul>
+                <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="isAutoFill" ref="loadmore">
+                    <ul>
+                        <li v-for="list in shareData" :key="list.articleId">
+                            <router-link :to="{ name:'share.detailes',params: {id:list.articleId} }">
+                                <!-- <img :src="img.img_url"> -->
+                                <!-- 懒加载实现，使用mintUI插件中v-lazy属性，请求可视区域内容 -->
+                                <img v-lazy="list.articleImg.articleImgSrc" :alt="list.articleImg.articleImgAlt">
+                                <p>
+                                    <span v-text="list.articleName"></span>
+                                    <br>
+                                    <span v-text="list.articleText"></span>
+                                </p>
+                            </router-link>
+                        </li>
+                    </ul>
+                </mt-loadmore>
             </div>
         </div>
     </div>
@@ -34,47 +36,77 @@
         data (){
             return {
                 categorys: [],
-                shareData: []
+                shareData: [],
+                id: 1,
+                pageIndex: 1,   //页码数
+                allLoaded:false, //是否禁止触发上拉函数
+                isAutoFill:false //是否自动触发上拉函数
             }
         },
         created (){
             //请求列表头部内容
             this.$axios.get(`/articleCategory/getAll`)
                 .then(res => {
+
                     this.categorys = res.data;
-                    // this.categorys.unshift({
-                    //     articleCategoryId: 0,
-                    //     articleCategoryName:'全部',
-                    //     description: '',
-                    //     keyword: '',
-                    //     title: ''
-                    // });
                 })
                 .catch(err => {
                     console.log(err);
                 });
 
-                this.changeCate (1);
+                this.changeCate (this.id);
             
         },
         methods: {
             //请求函数封装
             changeCate (id){
+                this.id = id;
                 this.$axios.get(`/article/getArticles/${id}/1/8`)
                 .then(res => {
+                    console.log(res.data.total);
+
                     this.shareData = res.data.list;
                 })
                 .catch(err => {
                     console.log(err);
                 });
+            },
+            loadBottom(){
+                console.log('开始上拉！')
+                //上拉调用加载更多函数
+                this.loadMoreCon();
+            },
+            loadMoreCon (){
+                this.$axios.get(`/article/getArticles/${this.id}/${++this.pageIndex}/8`)
+                .then( res => {
+                    this.shareData = this.shareData.concat(res.data.list);
+                    console.log(this.shareData);
+                    console.log(this.shareData.length);
+                    console.log(res.data.total);
+
+                    //判断是否还有数据
+                    if (this.shareData.length >= res.data.total) {
+                        this.allLoaded = true;//禁止调用上拉函数了
+                    }
+                    //上拉结束通知结束停止
+                    this.$refs.loadmore.onBottomLoaded();
+                }).catch( err => {
+                    console.log(err);
+                })
             }
         }
     }
 </script>
 
 <style scoped>
+    .share_wrap {
+        margin-top: 60px;
+    }
     .photo-list {
-        margin-top: 21px;
+        overflow: auto;
+        height:527px;
+        -webkit-overflow-scrolling: touch;
+        /* 这个高度设置,overflow:auto/scroll可以使上拉的时候加载内容 ,针对ios加个-webkit-overflow-scrolling: touch的属性*/
     }
 
     .photo-header li {
