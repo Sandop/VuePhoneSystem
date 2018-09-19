@@ -1,7 +1,11 @@
 <template>
     <div>
         <mt-header fixed title="来买吧"></mt-header>
-        <router-view></router-view>
+
+        <transition name="router" mode="out-in">
+            <router-view></router-view>
+        </transition>
+
         <nav class="mui-bar mui-bar-tab">
             <router-link class="mui-tab-item" :to="{name:'home'}">
                 <span class="mui-icon icon-shouye1"></span>
@@ -32,5 +36,11 @@
 <style>
 .mint-header.is-fixed {
     z-index: 666;
+}
+.router-enter-active,.router-leave-active {
+    transition: opacity .5s;
+}
+.router-enter, .router-leave-to {
+    opacity: 0;
 }
 </style>
