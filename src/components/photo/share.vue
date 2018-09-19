@@ -63,7 +63,7 @@
                 this.id = id;
                 this.$axios.get(`/article/getArticles/${id}/1/8`)
                 .then(res => {
-                    console.log(res.data.total);
+                    // console.log(res.data.total);
 
                     this.shareData = res.data.list;
                 })
@@ -80,9 +80,9 @@
                 this.$axios.get(`/article/getArticles/${this.id}/${++this.pageIndex}/8`)
                 .then( res => {
                     this.shareData = this.shareData.concat(res.data.list);
-                    console.log(this.shareData);
-                    console.log(this.shareData.length);
-                    console.log(res.data.total);
+                    // console.log(this.shareData);
+                    // console.log(this.shareData.length);
+                    // console.log(res.data.total);
 
                     //判断是否还有数据
                     if (this.shareData.length >= res.data.total) {

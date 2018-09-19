@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <nav-bar title="内容详情"></nav-bar>
+        <nav-bar :title="title"></nav-bar>
         <div class="news-title">
             <p v-text="newsDetails.articleName"></p>
             <div class="news-tab">
@@ -20,7 +20,7 @@
                 newsDetails : {},
                 articleEditor : {},
                 articleCategory : {},
-
+                title: ''
             }
         },
         created (){
@@ -31,6 +31,17 @@
                 this.articleEditor = res.data.articleEditor;
                 this.articleCategory = res.data.articleCategory;
             })
+        },
+        beforeRouteEnter (to,from,next){
+            let myTitle = '';
+            if ( from.name === 'news.list' ) {
+                myTitle = '新闻详情';
+            } else if ( from.name === 'photo.share' ) {
+                myTitle = '图文详情'
+            }
+             next(vm => {
+                 vm.title = myTitle;
+             })
         }
     }
 </script>
