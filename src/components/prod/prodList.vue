@@ -6,7 +6,7 @@
             <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="isAutoFill" ref="loadmore">
                 <ul class="mui-table-view mui-grid-view">
                     <li v-for="prod in prods" :key="prod.proId" class="mui-table-view-cell mui-media mui-col-xs-6">
-                        <router-link :to="{name:'prod.detail',query:{id:prod.proId} }">
+                        <router-link :to="{name:'prod.detail',params:{id:prod.proId} }">
                             <!-- v-lazy使用的 mintUi的插件实现产品图片的懒加载 -->
                             <img class="mui-media-object" v-lazy="prod.proImgs[0].proImgSrc" :alt="prod.proImgs[0].proImgAlt">
                             <div class="mui-media-body">{{prod.proName}}</div>

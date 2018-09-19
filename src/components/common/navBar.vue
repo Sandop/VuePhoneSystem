@@ -11,7 +11,6 @@
     export default {
         data (){
             return {
-
             }
         },
         props: {
@@ -19,6 +18,7 @@
         },
         methods: {
             goBack (){
+                //返回上一页
                 this.$router.go(-1);
             }
         }

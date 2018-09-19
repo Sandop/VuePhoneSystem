@@ -1,13 +1,7 @@
 <template>
     <div class="container">
         <!-- 轮播图 -->
-        <mt-swipe :auto="3000">
-            <mt-swipe-item v-for="(list,index) in imgs" :key="index">
-                <a :href="list.href" :rel="list.ref">
-                    <img :src="list.bannerSrc" :alt="list.bannerAlt">
-                </a>
-            </mt-swipe-item>
-        </mt-swipe>
+        <my-swiper :imgs="imgs"></my-swiper>
         <!-- 九宫格 -->
         <div class="mui-content">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -60,23 +54,16 @@ export default {
         }
     },
     created (){
-        this.$axios.get('http://visney.cn:81/banner/selectAllByTpye/1')
+        this.$axios.get('/banner/selectAllByTpye/1')
         .then(res => {
             this.imgs = res.data;
+            console.log(this.imgs)
         })
     }
 }
 </script>
 
 <style scoped>
-    .mint-swipe{
-        height: 187px;
-        max-height:187px; 
-    }
-    .mint-swipe img {
-        width: 100%;
-        height: 100%;
-    }
 
     .mui-table-view.mui-grid-view.mui-grid-9 {
         background-color:  #fff;

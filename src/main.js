@@ -24,7 +24,6 @@ import Shopcart from './components/shopcart/shopcart.vue';
 import Search from './components/search/search.vue';
 import NewsList from './components/news/newsList.vue';
 import NewsDetails from './components/news/newsdetails.vue';
-import NavBar from './components/common/navBar.vue';
 import PhotoShare from './components/photo/share.vue';
 import ProdList from './components/prod/prodList.vue';
 import ProdDetail from './components/prod/prodDetail.vue';
@@ -55,9 +54,11 @@ Axios.interceptors.response.use( function (config){
 
 
 //全局组件部分
+import NavBar from './components/common/navBar.vue';
+import MySwiper from './components/common/mySwiper.vue';
 
 Vue.component('navBar',NavBar);
-
+Vue.component('mySwiper',MySwiper);
 //全局组件部分结束
 
 //过滤器
@@ -125,7 +126,7 @@ let router = new VueRouter({
         },
         {   
             name: 'prod.detail',
-            path: '/prod/prodDetail',
+            path: '/prod/prodDetail/:id',
             component: ProdDetail
         },
     ]
