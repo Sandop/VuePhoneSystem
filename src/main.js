@@ -27,6 +27,8 @@ import NewsDetails from './components/news/newsdetails.vue';
 import PhotoShare from './components/photo/share.vue';
 import ProdList from './components/prod/prodList.vue';
 import ProdDetail from './components/prod/prodDetail.vue';
+import ProdInfo from './components/prod/prodInfo.vue';
+import ProdCommont from './components/prod/prodcommont.vue';
 
 
 
@@ -128,6 +130,16 @@ let router = new VueRouter({
             name: 'prod.detail',
             path: '/prod/prodDetail/:id',
             component: ProdDetail
+        },
+        {   
+            name: 'prod.info',
+            path: '/prod/prodInfo/:id',
+            component: ProdInfo
+        },
+        {   
+            name: 'prod.commont',
+            path: '/prod/prodCommont/:id',
+            component: ProdCommont
         },
     ]
 });
