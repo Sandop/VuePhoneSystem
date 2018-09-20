@@ -15,15 +15,17 @@
                     <s>￥{{prodInfo.proPrice}}</s> 销售价：<span>￥{{prodInfo.proPrice}}</span>
                 </li>
                 <li class="number-li">
-                    购买数量：<span>-</span><span>{{num}}</span><span>+</span>
+                    购买数量：<span @click="reduce">-</span><span>{{num}}</span><span @click="add">+</span>
                 </li>
                 <li>
                     <mt-button type="primary">立即购买</mt-button>
-                    <mt-button type="danger">加入购物车</mt-button>
+                    <mt-button type="danger" @click="addShopCart">加入购物车</mt-button>
                 </li>
             </ul>
         </div>
-        <div class="ball" v-if="isShow"></div>
+        <transition  name="ball" @after-enter="afterEnter">
+            <div class="ball" v-if="isShow"></div>
+        </transition>
         <div class="product-props">
             <ul>
                 <li>商品参数</li>
@@ -90,12 +92,59 @@
                     name: 'prod.commont',
                     params: {id}
                 })
+            },
+            reduce (){
+                if ( this.num <=1 ) return;
+                this.num --
+            },
+            add (){
+                if (this.num >= this.prodInfo.proId) return;
+                this.num ++
+            },
+            addShopCart (){
+                this.isShow = true;
+            },
+            //transition的钩子函数，处理过渡动画进入后的效果
+            afterEnter (){
+                this.isShow = false;
             }
         }
     }
 </script>
 
 <style scoped>
+    /* 添加购物车小球飞入动画 */
+    .ball-enter-active {
+        animation: bounce-in .5s;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: translate3d(0,0,0);
+        }
+        5% {
+            transform: translate3d(5px,-15px,0);
+        }
+        10% {
+            transform: translate3d(13px,-25px,0);
+        }
+        15% {
+            transform: translate3d(30px,-31px,0);
+        }
+        25% {
+            transform: translate3d(55px,-26px,0);
+        }
+        50% {
+            transform: translate3d(77px,-8px,0);
+        }
+        75% {
+            transform: translate3d(100px, 130px, 0);
+        }
+        100% {
+            transform: translate3d(110px, 300px, 0);
+        }
+    }
+
     .swiper-wrap {
         overflow:  hidden;
         width:  100%;
@@ -188,14 +237,14 @@
     }
 
     .ball {
-        border-radius: 50%;
-        background-color: red;
-        width: 24px;
-        height: 24px;
         position: absolute;
         top: 440px;
         left: 120px;
         display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: red;
         z-index: 9999;
     }
 </style>

@@ -72,7 +72,7 @@
                 });
             },
             loadBottom(){
-                console.log('开始上拉！')
+                // console.log('开始上拉！');
                 //上拉调用加载更多函数
                 this.loadMoreCon();
             },

@@ -57,7 +57,7 @@ export default {
         this.$axios.get('/banner/selectAllByTpye/1')
         .then(res => {
             this.imgs = res.data;
-            console.log(this.imgs)
+            // console.log(this.imgs)
         })
     }
 }
