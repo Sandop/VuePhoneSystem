@@ -29,11 +29,12 @@
 
 <script>
     import connect from "./components/common/connect.js";
+    import prodTools from "./components/common/prodTools.js";
 
     export default {
         data (){
             return {
-                carNum: 0       //购物车显示数量
+                carNum: prodTools.getTotalNum()       //购物车显示数量,通过prodTools从localstorage中获取
             }
         },
         created (){

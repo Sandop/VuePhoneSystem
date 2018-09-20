@@ -49,6 +49,7 @@
 
 <script>
     import connect from "../common/connect.js";
+    import prodTools from "../common/prodTools.js";
 
     export default {
         data (){
@@ -111,6 +112,12 @@
                 //购物车数量发送
                 connect.$emit('addShopCart',this.num);
                 this.isShow = true;
+
+                //添加产品
+                prodTools.addOrUpdata({
+                    id: this.id,
+                    num: this.num
+                })
             },
             //transition的钩子函数，处理过渡动画进入后的效果
             afterEnter (){
