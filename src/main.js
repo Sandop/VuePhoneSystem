@@ -12,6 +12,10 @@ import Axios from 'axios';
 
 import Moment from 'moment';
 
+import vuePicturePreview from 'vue-picture-preview'
+Vue.use(vuePicturePreview)
+
+
 //css引入
 import './static/vender/mui/dist/css/mui.css';
 import './static/css/reset.css';

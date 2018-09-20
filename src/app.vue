@@ -5,7 +5,7 @@
         <transition name="router" mode="out-in">
             <router-view></router-view>
         </transition>
-
+        <lg-preview></lg-preview>
         <nav class="mui-bar mui-bar-tab">
             <router-link class="mui-tab-item" :to="{name:'home'}">
                 <span class="mui-icon icon-shouye1"></span>

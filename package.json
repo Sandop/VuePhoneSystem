@@ -32,7 +32,7 @@
     "mint-ui": "^2.2.9",
     "moment": "^2.18.1",
     "vue": "^2.4.2",
-    "vue-preview": "^1.0.5",
+    "vue-picture-preview": "^1.2.0",
     "vue-router": "^2.7.0"
   }
 }
