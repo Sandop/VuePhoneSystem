@@ -16,7 +16,7 @@
                 <span class="mui-tab-label">会员</span>
             </router-link>
             <router-link class="mui-tab-item" :to="{name:'shopcart'}">
-                <span class="mui-icon icon-gouwucheman"><span class="mui-badge">9</span></span>
+                <span class="mui-icon icon-gouwucheman"><span class="mui-badge">{{carNum}}</span></span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
             <router-link class="mui-tab-item" :to="{name:'search'}">
@@ -28,8 +28,21 @@
 </template>
 
 <script>
-    export default {
+    import connect from "./components/common/connect.js";
 
+    export default {
+        data (){
+            return {
+                carNum: 0       //购物车显示数量
+            }
+        },
+        created (){
+            //接受详情传输商品数量
+            connect.$on( 'addShopCart', num =>{
+                // console.log('接受！');
+                this.carNum += num;
+            })
+        }
     }
 </script>
 

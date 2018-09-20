@@ -48,6 +48,8 @@
 </template>
 
 <script>
+    import connect from "../common/connect.js";
+
     export default {
         data (){
             return {
@@ -93,15 +95,21 @@
                     params: {id}
                 })
             },
+            //商品数量减少
             reduce (){
                 if ( this.num <=1 ) return;
                 this.num --
             },
+            //商品数量增加
             add (){
                 if (this.num >= this.prodInfo.proId) return;
                 this.num ++
             },
+            //添加到购物车功能
             addShopCart (){
+                // console.log('发送！')
+                //购物车数量发送
+                connect.$emit('addShopCart',this.num);
                 this.isShow = true;
             },
             //transition的钩子函数，处理过渡动画进入后的效果
