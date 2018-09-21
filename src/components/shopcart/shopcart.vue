@@ -2,32 +2,35 @@
     <div class="container">
         <nav-bar title="购物车"></nav-bar>
         <div class="pay-detail">
-            <ul>
-                <li v-for="(prod,index) in allProdsInfo" :key="prod.proId"  class="p-list">
-                    <mt-switch v-model="prod.isPicked"></mt-switch>
-                    <img :src="prod.proImgs[0].proImgSrc">
-                    <div class="pay-calc">
-                        <p v-text="prod.proName"></p>
-                        <div class="calc">
-                            <span>￥{{prod.proPrice}}</span>
-                            <span>-</span>
-                            <span >{{index}}</span>
-                            <span>+</span>
-                            <a href="javascript:;">删除</a>
+            <div>
+                <ul>
+                    <li v-for="(prod,index) in allProdsInfo" :key="prod.proId"  class="p-list">
+                        <mt-switch v-model="prod.isPicked"></mt-switch>
+                        <img :src="prod.proImgs[0].proImgSrc">
+                        <div class="pay-calc">
+                            <p v-text="prod.proName"></p>
+                            <div class="calc">
+                                <span>￥{{prod.proPrice}}</span>
+                                <span>-</span>
+                                <span >{{prod.num}}</span>
+                                <span>+</span>
+                                <a href="javascript:;">删除</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="pay-info" v-if="!allProdsInfo.length">还没有产品，去其他地方逛逛吧~</div>
         </div>
-        <!-- <div class="show-price">
+        <div class="show-price">
             <div class="show-1">
                 <p>总计(不含运费):</p>
-                <span>已经选择商品{{payment.num}}件，总价￥{{payment.sum}}元</span>
+                <span>已经选择商品{{0}}件，总价￥{{0}}元</span>
             </div>
             <div class="show-2">
                 <mt-button type="danger" size="large">去结算</mt-button>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -54,15 +57,21 @@
             if ( !prodsArray.length ) return;
 
             prodsArray.map( (cur,index) => {
+                console.log(cur,index)
                 this.$axios.get(`/product/detail/${cur}`)
                 .then( res => {
-                    this.allProdsInfo[index] = res.data;
+                    //将控制开关和商品数量添加到商品信息中
+                    res.data.isPicked = true;
+                    res.data.num = prods[cur];
+                    this.allProdsInfo.push(res.data);
+
                 }).catch ( err => {
                     console.log(err);
                 })
             })
 
             console.log(this.allProdsInfo);
+
         },
         methods: {
 
@@ -71,6 +80,17 @@
 </script>
 
 <style scoped>
+    .pay-info {
+        color: #cccccc;
+        font-size: 18px;
+        line-height: 80px;
+        text-align: center;
+    }
+    .pay-detail {
+        min-height: 30px;
+        margin-top: 55px;
+    }
+
     .pay-detail ul li {
         list-style: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -135,6 +155,7 @@
     }
 
     .show-price {
+        padding: 30px 0;
         background-color: rgba(0, 0, 0, 0.2);
     }
 </style>
