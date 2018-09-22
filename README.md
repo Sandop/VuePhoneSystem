@@ -67,4 +67,45 @@
 
 ```
 
+### 3、项目截图
 
+#### 1、首页
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/home.png"  width="365" height="619"/>
+
+
+#### 2、新闻列表
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/news-list.png"  width="365" height="619"/>
+
+> 实现上拉加载更多
+
+#### 3、图文分享
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/share.png"  width="365" height="619"/>
+
+> 列表切换，图片懒加载，上拉加载更多
+
+#### 4、购物车
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/shopcart.png"  width="365" height="619"/>
+
+> 商品添加、减少、删除、选中价格数量计算功能
+
+#### 5、商品列表
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/prodlist.png"  width="365" height="619"/>
+
+> 图片懒加载，上拉加载更多
+
+#### 6、商品详情
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/prod-details.png"  width="365" height="619"/>
+
+> 商品添加、减少功能
+
+#### 7、商品图文
+
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/prodimg.png"  width="365" height="619"/>
+
+> 点击图片放大查看效果
