@@ -11,11 +11,11 @@
                             <p v-text="prod.proName"></p>
                             <div class="calc">
                                 <span>￥{{prod.proPrice}}</span>
-                                <span>-</span>
+                                <span @click="reduce(index)">-</span>
                                 <span >{{prod.num}}</span>
-                                <span>+</span>
-                                <a href="javascript:;">删除</a>
-                            </div>
+                                <span @click="add(index)">+</span>
+                                <a href="javascript:;" @click="del(index)">删除</a>
+                            </div> 
                         </div>
                     </li>
                 </ul>
@@ -74,7 +74,36 @@
 
         },
         methods: {
-
+            reduce (i){
+                if (this.allProdsInfo[i].num <= 1) return;
+                this.allProdsInfo[i].num --;
+                //改变购物车数量
+                connect.$emit('addShopCart',-1);
+                //在localstorage中添加
+                prodTools.addOrUpdata({
+                    id:  this.allProdsInfo[i].proId,
+                    num: -1
+                })
+            },
+            add (i){
+                this.allProdsInfo[i].num ++;
+                //改变购物车数量
+                connect.$emit('addShopCart',1);
+                //在localstorage中添加
+                prodTools.addOrUpdata({
+                    id:  this.allProdsInfo[i].proId,
+                    num: 1
+                })
+            },
+            del (i){
+                
+                //删除localst中数据
+                prodTools.delete(this.allProdsInfo[i].proId);
+                //购物车数量变化
+                connect.$emit('addShopCart',-this.allProdsInfo[i].num);
+                //删除列表中数据
+                this.allProdsInfo.splice(i,1);
+            }
         }
     }
 </script>
