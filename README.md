@@ -2,6 +2,17 @@
     这是一个使用Vue做的移动端的项目，其中使用了Mint UI 、Moment 、MUI等完成,适合新手练习vue使用。
     页面有新闻页面，图文分享页面，商品页面，购物车等基本页面，包含功能有使用mintUi实现 列表页面图片懒加载 、 轮播图 、 页面间跳转显示加载中动画 、 列表上拉加载更多 、 商品详情图片点击放大效果 、 购物车小球飞入效果 、 购物车增加减少添加删除等功能！希望对大家有所帮助 (*@ο@*) 哇～
 
+## Build Setup
+
+``` bash
+# install dependencies
+$ npm install # Or yarn install
+
+$ npm run dev
+
+$ npm run build
+
+```
 
 ## 一、项目开始
 
@@ -106,6 +117,11 @@
 
 #### 7、商品图文
 
-<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/prodimg.png"  width="365" height="619"/>
+<img src="https://github.com/Sandop/VuePhoneSystem/blob/master/screenshots/prod-img.png"  width="365" height="619"/>
 
 > 点击图片放大查看效果
+
+
+## 二、写在最后
+
+> 此项目适合刚接触vue的同学联系使用，如果对大家有帮助，欢迎给个star，O(∩_∩)O谢谢！
