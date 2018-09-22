@@ -25,7 +25,9 @@
         <div class="show-price">
             <div class="show-1">
                 <p>总计(不含运费):</p>
-                <span>已经选择商品{{0}}件，总价￥{{0}}元</span>
+                <span>已经选择商品<i>{{payMent.num}}</i>件</span> 
+                <br>
+                <span>总价￥<i>{{payMent.sumMoney}}</i>元</span>
             </div>
             <div class="show-2">
                 <mt-button type="danger" size="large">去结算</mt-button>
@@ -47,31 +49,23 @@
         created (){
             //localstorage 中商品信息
             let prods = prodTools.getProds();
-            console.log(prods);
-
-
+            // console.log(prods);
             //获取所有商品ID，以数组方式存储
             let prodsArray = Object.keys(prods);
-            console.log(prodsArray);
+            // console.log(prodsArray);
             //若商品无，则返回
             if ( !prodsArray.length ) return;
-
             prodsArray.map( (cur,index) => {
-                console.log(cur,index)
                 this.$axios.get(`/product/detail/${cur}`)
                 .then( res => {
                     //将控制开关和商品数量添加到商品信息中
                     res.data.isPicked = true;
                     res.data.num = prods[cur];
                     this.allProdsInfo.push(res.data);
-
                 }).catch ( err => {
                     console.log(err);
                 })
             })
-
-            console.log(this.allProdsInfo);
-
         },
         methods: {
             reduce (i){
@@ -96,13 +90,34 @@
                 })
             },
             del (i){
-                
                 //删除localst中数据
                 prodTools.delete(this.allProdsInfo[i].proId);
                 //购物车数量变化
                 connect.$emit('addShopCart',-this.allProdsInfo[i].num);
                 //删除列表中数据
                 this.allProdsInfo.splice(i,1);
+            }
+        },
+        computed: {
+            payMent (){
+                /**
+                 * 计算商品数量以及金额
+                 * 判断是否为选中状态
+                 * 计算总额
+                 */
+                let num = 0;
+                let sumMoney = 0;
+                this.allProdsInfo.forEach(element => {
+                    console.log(element);
+                    if (element.isPicked) {
+                        num += element.num;
+                        sumMoney = element.num * element.proPrice
+                    }
+                });
+                return {
+                    num,
+                    sumMoney
+                }
             }
         }
     }
@@ -175,12 +190,14 @@
 
     .show-1,
     .show-2 {
-        display: inline-block;
+        width: 80%;
+        margin: 15px auto;
     }
 
-    .show-1,
-    .show-2 {
-        margin-left: 30px;
+    .show-1 i {
+        margin: 0 5px;
+        color: red;
+        font-size: 24px;
     }
 
     .show-price {
